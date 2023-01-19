@@ -4,10 +4,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "./redux/hooks";
-import { selectTheme } from "./redux/theme/selectors";
-import { setThemeMode } from "./redux/theme/slice";
-import { Theme } from "./redux/theme/types";
 import { darkMode, lightMode } from "./theme";
+import { selectTheme, setThemeMode, Theme } from "./redux/theme";
 import { AdminLayout, UsersLayout } from "./layouts";
 
 function App() {
