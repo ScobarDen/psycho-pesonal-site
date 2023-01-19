@@ -7,6 +7,7 @@ import { useAppDispatch } from "./redux/hooks";
 import { darkMode, lightMode } from "./theme";
 import { selectTheme, setThemeMode, Theme } from "./redux/theme";
 import { AdminLayout, UsersLayout } from "./layouts";
+import { NavBar } from "./components/ui/NavBar";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={mode === Theme.DARK ? lightMode : darkMode}>
       <CssBaseline />
+      <NavBar />
       <Routes>
         {isAdmin ? (
           <Route path="/" element={<AdminLayout />}></Route>
