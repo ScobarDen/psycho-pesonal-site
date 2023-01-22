@@ -25,7 +25,7 @@ function App() {
       <Header />
       <Routes>
         {isAdmin ? (
-          <Route path="/" element={<AdminLayout />}></Route>
+          <Route path="/admin" element={<AdminLayout />}></Route>
         ) : (
           <Route path="/" element={<UsersLayout />}></Route>
         )}
