@@ -31,6 +31,24 @@ export const lightMode = createTheme({
       fontWeight: 50,
     },
   },
+  components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: '#fafafa',
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: '#fafafa',
+        },
+      },
+    },
+  },
 });
 
 export const darkMode = createTheme({
@@ -71,6 +89,24 @@ export const darkMode = createTheme({
     h6: {
       fontWeight: 50,
       color: '#fafafa',
+    },
+  },
+  components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            color: '#fafafa',
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: '#fafafa',
+        },
+      },
     },
   },
 });
