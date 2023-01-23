@@ -15,8 +15,8 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector } from 'react-redux';
-import { selectTheme, Theme, toggleThemeMode } from '../../../redux/theme';
-import { useAppDispatch } from '../../../redux/hooks';
+import { selectTheme, Theme, toggleThemeMode } from '../../redux/theme';
+import { useAppDispatch } from '../../redux/hooks';
 
 export type PathType = `/${string}`;
 

@@ -20,10 +20,7 @@ function App() {
   return (
     <ThemeProvider theme={mode === Theme.LIGHT ? lightMode : darkMode}>
       <CssBaseline />
-      <Header />
-      <Container maxWidth="md">
-        <MyRouter />
-      </Container>
+      <MyRouter />
     </ThemeProvider>
   );
 }
