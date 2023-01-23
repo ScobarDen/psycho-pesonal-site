@@ -8,6 +8,8 @@ import { darkMode, lightMode } from './theme';
 import { selectTheme, setThemeMode, Theme } from './redux/theme';
 import { AdminLayout, UsersLayout } from './layouts';
 import Header from './components/ui/Header';
+import { MyRouter } from './MyRouter';
+import { Container } from '@mui/material';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -17,19 +19,13 @@ function App() {
     dispatch(setThemeMode(themeMode));
   }, []);
 
-  const isAdmin = false; // todo: сделать получение этого значения с бэкенда
-
   return (
     <ThemeProvider theme={mode === Theme.LIGHT ? lightMode : darkMode}>
       <CssBaseline />
       <Header />
-      <Routes>
-        {isAdmin ? (
-          <Route path="/admin" element={<AdminLayout />}></Route>
-        ) : (
-          <Route path="/" element={<UsersLayout />}></Route>
-        )}
-      </Routes>
+      <Container maxWidth="md">
+        <MyRouter />
+      </Container>
     </ThemeProvider>
   );
 }
