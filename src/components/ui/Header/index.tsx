@@ -39,6 +39,7 @@ const Header: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const mode = useSelector(selectTheme);
   const dispatch = useAppDispatch();
+
   const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
     setNavValue(newValue);
   };
@@ -55,7 +56,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Toolbar>
         <PsychologyIcon sx={{ marginRight: '1rem', display: { xs: 'none', lg: 'block' } }} />
         <Box sx={{ marginRight: '1rem', display: { xs: 'block', lg: 'none' } }}>
