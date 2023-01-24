@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Button, Paper, TextField, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from "react-router-dom";
 
 interface IFormInput {
   email: string;
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -27,6 +29,7 @@ export const RegisterPage = () => {
 
   const onSubmit = (data: IFormInput) => {
     alert(JSON.stringify(data));
+    navigate("/");
     // todo: доделать
   };
 
