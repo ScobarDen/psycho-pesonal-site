@@ -18,53 +18,36 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector } from 'react-redux';
 import { selectTheme, Theme, toggleThemeMode } from '../../redux/theme';
 import { useAppDispatch } from '../../redux/hooks';
-
-export type PathType = `/${string}`;
-
-type NavFieldType = {
-  id: number;
-  label: string;
-  path: PathType;
-};
-
-const navBarFields: NavFieldType[] = [
-  { id: 1, label: 'Обо мне', path: '/' },
-  { id: 2, label: 'Онлайн запись', path: '/online' },
-  { id: 3, label: 'Личный прием', path: '/offline' },
-  { id: 4, label: 'Статьи', path: '/posts' },
-];
-
-const userFieldsNotAuth: NavFieldType[] = [
-  { id: 1, label: 'Войти', path: '/login' },
-  { id: 2, label: 'Зарегистрироваться', path: '/register' },
-];
-
-const userFieldsAuth: NavFieldType[] = [{ id: 1, label: 'Выйти', path: '/' }];
+import {
+  selectNavFields,
+  setAuthNavMenu,
+  setAuthUserMenu,
+  setNavValue,
+  setNotAuthNavMenu,
+  setNotAuthUserMenu,
+} from '../../redux/navFields';
 
 const Header: React.FC = () => {
   const isAuth = false; // todo: Должно потом быть с бэка
-
-  const [navValue, setNavValue] = useState(0);
-  const [navMenu, setNavMenu] = useState(navBarFields);
-  const [userMenu, setUserMenu] = useState(userFieldsAuth);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
     if (isAuth) {
-      setNavMenu((prevState) => [...prevState, { id: 5, label: 'Личный кабинет', path: '/me' }]);
-      setUserMenu(userFieldsAuth);
+      dispatch(setAuthNavMenu());
+      dispatch(setAuthUserMenu());
     } else {
-      setNavMenu(navBarFields);
-      setUserMenu(userFieldsNotAuth);
+      dispatch(setNotAuthNavMenu());
+      dispatch(setNotAuthUserMenu());
     }
   }, [isAuth]);
 
+  const { navValue, userMenu, navMenu } = useSelector(selectNavFields);
   const mode = useSelector(selectTheme);
   const dispatch = useAppDispatch();
 
   const handleChangeTab = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setNavValue(newValue);
+    dispatch(setNavValue(newValue));
   };
   const handleToggleTheme = () => {
     dispatch(toggleThemeMode());
