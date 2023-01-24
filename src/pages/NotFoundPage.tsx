@@ -4,7 +4,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link, useLocation } from 'react-router-dom';
 
-export const NotFound: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   const location = useLocation();
   return (
     <Box

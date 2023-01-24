@@ -44,8 +44,8 @@ export const navFieldsSlice = createSlice({
     },
     setNotAuthUserMenu(state) {
       state.userMenu = [
-        { id: 1, label: 'Войти', path: '/login' },
-        { id: 2, label: 'Зарегистрироваться', path: '/register' },
+        { id: 1, label: 'Войти', path: '/auth/login' },
+        { id: 2, label: 'Зарегистрироваться', path: '/auth/register' },
       ];
     },
     setNavValue(state, action: PayloadAction<number>) {

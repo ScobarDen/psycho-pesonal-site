@@ -3,6 +3,7 @@ import {
   AppBar,
   Avatar,
   Box,
+  Container,
   IconButton,
   Menu,
   MenuItem,
@@ -27,6 +28,7 @@ import {
   setNotAuthUserMenu,
   setSignNavMenu,
 } from '../../redux/navFields';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const isAuth = false; // todo: Должно потом быть с бэка
@@ -78,84 +80,92 @@ const Header: React.FC = () => {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
-        <PsychologyIcon sx={{ marginRight: 1, display: { xs: 'none', lg: 'block' } }} />
-        <Box sx={{ marginRight: '1rem', display: { xs: 'block', lg: 'none' } }}>
-          {navMenu.length !== 0 && (
-            <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleOpenNavMenu}>
-              <MenuIcon />
-            </IconButton>
-          )}
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: 'block', lg: 'none' },
-            }}>
-            {navMenu.map((tab, index) => (
-              <MenuItem key={tab.id} onClick={() => handleChangeMenuItem(index)}>
-                <Typography textAlign="center">{tab.label}</Typography>
-              </MenuItem>
+      <Container maxWidth="xl">
+        <Toolbar>
+          <PsychologyIcon sx={{ marginRight: 1, display: { xs: 'none', lg: 'block' } }} />
+          <Box sx={{ marginRight: '1rem', display: { xs: 'block', lg: 'none' } }}>
+            {navMenu.length !== 0 && (
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleOpenNavMenu}>
+                <MenuIcon />
+              </IconButton>
+            )}
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', lg: 'none' },
+              }}>
+              {navMenu.map((tab, index) => (
+                <MenuItem key={tab.id} onClick={() => handleChangeMenuItem(index)}>
+                  <Typography textAlign="center">{tab.label}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            КЛИНИЧЕСКИЙ ПСИХОЛОГ Ася Давар
+          </Typography>
+          <Tabs
+            value={navValue}
+            onChange={handleChangeTab}
+            sx={{ display: { xs: 'none', lg: 'flex' } }}>
+            {navMenu.map((tab) => (
+              <Tab key={tab.id} label={tab.label} />
             ))}
-          </Menu>
-        </Box>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          КЛИНИЧЕСКИЙ ПСИХОЛОГ Ася Давар
-        </Typography>
-        <Tabs
-          value={navValue}
-          onChange={handleChangeTab}
-          sx={{ display: { xs: 'none', lg: 'flex' } }}>
-          {navMenu.map((tab) => (
-            <Tab key={tab.id} label={tab.label} />
-          ))}
-        </Tabs>
-        <IconButton
-          onClick={handleToggleTheme}
-          edge="start"
-          color="inherit"
-          aria-label="theme"
-          sx={{ marginLeft: 0.5 }}>
-          {mode === Theme.LIGHT ? <DarkModeIcon /> : <LightModeIcon />}
-        </IconButton>
-        <Box>
-          <IconButton onClick={handleOpenUserMenu}>
-            <Avatar alt="user" src="" />
+          </Tabs>
+          <IconButton
+            onClick={handleToggleTheme}
+            edge="start"
+            color="inherit"
+            aria-label="theme"
+            sx={{ marginLeft: 0.5 }}>
+            {mode === Theme.LIGHT ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
-          <Menu
-            id="menu-appbar"
-            sx={{ marginTop: 5 }}
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}>
-            {userMenu.map((field) => (
-              <MenuItem key={field.id} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{field.label}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-      </Toolbar>
+          <Box>
+            <IconButton onClick={handleOpenUserMenu}>
+              <Avatar alt="user" src="" />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              sx={{ marginTop: 5 }}
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}>
+              {userMenu.map((field) => (
+                <Link to={field.path}>
+                  <MenuItem key={field.id} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{field.label}</Typography>
+                  </MenuItem>
+                </Link>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
