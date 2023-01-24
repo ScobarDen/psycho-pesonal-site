@@ -118,7 +118,9 @@ const Header: React.FC = () => {
             </Menu>
           </Box>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            КЛИНИЧЕСКИЙ ПСИХОЛОГ Ася Давар
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              КЛИНИЧЕСКИЙ ПСИХОЛОГ Ася Давар
+            </Link>
           </Typography>
           <Tabs
             value={navValue}
@@ -156,8 +158,11 @@ const Header: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
               {userMenu.map((field) => (
-                <Link key={field.id} to={field.path} style={{color: "inherit", textDecoration: "none"}}>
-                  <MenuItem  onClick={handleCloseUserMenu}>
+                <Link
+                  key={field.id}
+                  to={field.path}
+                  style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{field.label}</Typography>
                   </MenuItem>
                 </Link>

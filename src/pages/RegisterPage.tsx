@@ -3,20 +3,20 @@ import { useForm, Controller } from 'react-hook-form';
 import { Button, Paper, TextField, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 interface IFormInput {
   email: string;
   password: string;
   fio: string;
-  avatarUrl: string;
 }
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Введите корректный email').required('Это обязательное поле'),
-  password: Yup.string().min(6, 'Пароль должен быть больше 6 символов').required('Это обязательное поле'),
+  password: Yup.string()
+    .min(6, 'Пароль должен быть больше 6 символов')
+    .required('Это обязательное поле'),
   fio: Yup.string().min(6, 'Введите имя полностью').required('Это обязательное поле'),
-  avatarUrl: Yup.string().url('Введите корректный URL изображения'),
 });
 
 export const RegisterPage = () => {
@@ -25,11 +25,11 @@ export const RegisterPage = () => {
     control,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<IFormInput>({ resolver: yupResolver(validationSchema), mode: "onTouched" });
+  } = useForm<IFormInput>({ resolver: yupResolver(validationSchema), mode: 'onTouched' });
 
   const onSubmit = (data: IFormInput) => {
     alert(JSON.stringify(data));
-    navigate("/");
+    navigate('/');
     // todo: доделать
   };
 
@@ -51,21 +51,6 @@ export const RegisterPage = () => {
             />
           )}
           name="fio"
-          control={control}
-          defaultValue=""
-        />
-        <Controller
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Аватар"
-              fullWidth
-              sx={{ marginBottom: 1 }}
-              error={Boolean(errors.avatarUrl?.message)}
-              helperText={errors.avatarUrl?.message}
-            />
-          )}
-          name="avatarUrl"
           control={control}
           defaultValue=""
         />

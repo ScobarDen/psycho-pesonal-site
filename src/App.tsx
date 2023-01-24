@@ -5,9 +5,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from './redux/hooks';
 import { darkMode, lightMode } from './theme';
 import { selectTheme, setThemeMode, Theme } from './redux/theme';
-import Header from './components/ui/Header';
 import { MyRouter } from './MyRouter';
-import { Container } from '@mui/material';
 
 function App() {
   const dispatch = useAppDispatch();
