@@ -1,33 +1,41 @@
-import React, { useState } from "react";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Button, Paper, TextField, Typography } from "@mui/material";
 
-interface FormData {
+interface IFormInput {
   email: string;
   password: string;
 }
 
 export const LoginPage = () => {
+  const { control, handleSubmit } = useForm<IFormInput>();
 
-
-
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
-
+  const onSubmit = (data: IFormInput) => {
+    alert(JSON.stringify(data));
   };
 
-
   return (
-      <Paper elevation={5} sx={{p: 5}}>
-        <Typography variant="h5" sx={{marginBottom: 3}}>
-          Вход в аккаунт
-        </Typography>
-        <form>
-
-        </form>
-      </Paper>
+    <Paper elevation={5} sx={{p: 5}}>
+      <Typography sx={{marginBottom: 1}} variant="h5">
+        Вход в аккаунт
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          render={({ field }) => <TextField {...field} label="Email" fullWidth sx={{marginBottom: 1}} />}
+          name="email"
+          control={control}
+          defaultValue=""
+        />
+        <Controller
+          render={({ field }) => <TextField {...field} label="Пароль" fullWidth sx={{marginBottom: 3}} />}
+          name="password"
+          control={control}
+          defaultValue=""
+        />
+        <Button disabled={false} type="submit" size="large" variant="contained" fullWidth>
+          Войти
+        </Button>
+      </form>
+    </Paper>
   );
 };

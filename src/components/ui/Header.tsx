@@ -156,8 +156,8 @@ const Header: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
               {userMenu.map((field) => (
-                <Link to={field.path}>
-                  <MenuItem key={field.id} onClick={handleCloseUserMenu}>
+                <Link key={field.id} to={field.path} style={{color: "inherit", textDecoration: "none"}}>
+                  <MenuItem  onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{field.label}</Typography>
                   </MenuItem>
                 </Link>
