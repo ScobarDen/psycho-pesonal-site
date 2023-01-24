@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from './counter/counterSlice';
 import theme from './theme/slice';
+import navFields from './navFields/slice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     theme,
+    navFields,
   },
 });
 
