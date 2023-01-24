@@ -131,7 +131,7 @@ const Header: React.FC = () => {
         </IconButton>
         <Box>
           <IconButton onClick={handleOpenUserMenu}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="user" src="" />
           </IconButton>
           <Menu
             id="menu-appbar"
