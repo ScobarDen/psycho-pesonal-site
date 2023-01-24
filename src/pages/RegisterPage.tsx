@@ -7,14 +7,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 interface IFormInput {
   email: string;
   password: string;
+  fio: string;
+  avatarUrl: string;
 }
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Введите корректный email').required('Это обязательное поле'),
   password: Yup.string().min(6, 'Пароль должен быть больше 6 символов').required('Это обязательное поле'),
+  fio: Yup.string().min(6, 'Введите имя полностью').required('Это обязательное поле'),
+  avatarUrl: Yup.string().url('Введите корректный URL изображения'),
 });
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const {
     control,
     handleSubmit,
@@ -29,9 +33,39 @@ export const LoginPage = () => {
   return (
     <Paper elevation={5} sx={{ p: 5 }}>
       <Typography sx={{ marginBottom: 1 }} variant="h5">
-        Вход в аккаунт
+        Регистрация
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="ФИО"
+              fullWidth
+              sx={{ marginBottom: 1 }}
+              error={Boolean(errors.fio?.message)}
+              helperText={errors.fio?.message}
+            />
+          )}
+          name="fio"
+          control={control}
+          defaultValue=""
+        />
+        <Controller
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Аватар"
+              fullWidth
+              sx={{ marginBottom: 1 }}
+              error={Boolean(errors.avatarUrl?.message)}
+              helperText={errors.avatarUrl?.message}
+            />
+          )}
+          name="avatarUrl"
+          control={control}
+          defaultValue=""
+        />
         <Controller
           render={({ field }) => (
             <TextField

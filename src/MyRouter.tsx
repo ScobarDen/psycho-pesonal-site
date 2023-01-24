@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { AdminLayout, AuthenticationLayout, UsersLayout } from "./layouts";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { LoginPage } from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
 
 export const MyRouter: React.FC = () => {
   const isAdmin = false; // todo: сделать получение этого значения с бэкенда
@@ -15,6 +16,7 @@ export const MyRouter: React.FC = () => {
       )}
       <Route path="/auth" element={<AuthenticationLayout/>}>
         <Route path="login" element={<LoginPage/>}/>
+        <Route path="register" element={<RegisterPage/>}/>
       </Route>
       <Route
         path="*"
