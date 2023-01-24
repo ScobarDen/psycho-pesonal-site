@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
+  Avatar,
   Box,
   IconButton,
   Menu,
@@ -31,12 +32,34 @@ const navBarFields: NavFieldType[] = [
   { id: 2, label: 'Онлайн запись', path: '/online' },
   { id: 3, label: 'Личный прием', path: '/offline' },
   { id: 4, label: 'Статьи', path: '/posts' },
-  { id: 5, label: 'Войти/Регистрация', path: '/auth' },
 ];
 
+const userFieldsNotAuth: NavFieldType[] = [
+  { id: 1, label: 'Войти', path: '/login' },
+  { id: 2, label: 'Зарегистрироваться', path: '/register' },
+];
+
+const userFieldsAuth: NavFieldType[] = [{ id: 1, label: 'Выйти', path: '/' }];
+
 const Header: React.FC = () => {
+  const isAuth = false; // todo: Должно потом быть с бэка
+
   const [navValue, setNavValue] = useState(0);
+  const [navMenu, setNavMenu] = useState(navBarFields);
+  const [userMenu, setUserMenu] = useState(userFieldsAuth);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  useEffect(() => {
+    if (isAuth) {
+      setNavMenu((prevState) => [...prevState, { id: 5, label: 'Личный кабинет', path: '/me' }]);
+      setUserMenu(userFieldsAuth);
+    } else {
+      setNavMenu(navBarFields);
+      setUserMenu(userFieldsNotAuth);
+    }
+  }, [isAuth]);
+
   const mode = useSelector(selectTheme);
   const dispatch = useAppDispatch();
 
@@ -51,14 +74,27 @@ const Header: React.FC = () => {
     setAnchorElNav(event.currentTarget);
   };
 
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleChangeMenuItem = (newValue: number) => {
+    handleCloseNavMenu();
+    setNavValue(newValue);
   };
 
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <PsychologyIcon sx={{ marginRight: '1rem', display: { xs: 'none', lg: 'block' } }} />
+        <PsychologyIcon sx={{ marginRight: 1, display: { xs: 'none', lg: 'block' } }} />
         <Box sx={{ marginRight: '1rem', display: { xs: 'block', lg: 'none' } }}>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleOpenNavMenu}>
             <MenuIcon />
@@ -80,8 +116,8 @@ const Header: React.FC = () => {
             sx={{
               display: { xs: 'block', lg: 'none' },
             }}>
-            {navBarFields.map((tab) => (
-              <MenuItem key={tab.id} onClick={handleCloseNavMenu}>
+            {navMenu.map((tab, index) => (
+              <MenuItem key={tab.id} onClick={() => handleChangeMenuItem(index)}>
                 <Typography textAlign="center">{tab.label}</Typography>
               </MenuItem>
             ))}
@@ -94,13 +130,44 @@ const Header: React.FC = () => {
           value={navValue}
           onChange={handleChangeTab}
           sx={{ display: { xs: 'none', lg: 'flex' } }}>
-          {navBarFields.map((tab) => (
+          {navMenu.map((tab) => (
             <Tab key={tab.id} label={tab.label} />
           ))}
         </Tabs>
-        <IconButton onClick={handleToggleTheme} edge="start" color="inherit" aria-label="theme">
+        <IconButton
+          onClick={handleToggleTheme}
+          edge="start"
+          color="inherit"
+          aria-label="theme"
+          sx={{ marginLeft: 0.5 }}>
           {mode === Theme.LIGHT ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
+        <Box>
+          <IconButton onClick={handleOpenUserMenu}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            sx={{ marginTop: 5 }}
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}>
+            {userMenu.map((field) => (
+              <MenuItem key={field.id} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{field.label}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
   );
