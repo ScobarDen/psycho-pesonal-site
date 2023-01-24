@@ -25,6 +25,7 @@ import {
   setNavValue,
   setNotAuthNavMenu,
   setNotAuthUserMenu,
+  setSignNavMenu,
 } from '../../redux/navFields';
 
 const Header: React.FC = () => {
@@ -38,6 +39,7 @@ const Header: React.FC = () => {
       dispatch(setAuthUserMenu());
     } else {
       dispatch(setNotAuthNavMenu());
+      // dispatch(setSignNavMenu());
       dispatch(setNotAuthUserMenu());
     }
   }, [isAuth]);
@@ -79,9 +81,11 @@ const Header: React.FC = () => {
       <Toolbar>
         <PsychologyIcon sx={{ marginRight: 1, display: { xs: 'none', lg: 'block' } }} />
         <Box sx={{ marginRight: '1rem', display: { xs: 'block', lg: 'none' } }}>
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleOpenNavMenu}>
-            <MenuIcon />
-          </IconButton>
+          {navMenu.length !== 0 && (
+            <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleOpenNavMenu}>
+              <MenuIcon />
+            </IconButton>
+          )}
           <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}

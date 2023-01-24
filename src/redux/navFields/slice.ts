@@ -36,6 +36,9 @@ export const navFieldsSlice = createSlice({
         { id: 4, label: 'Статьи', path: '/posts' },
       ];
     },
+    setSignNavMenu(state) {
+      state.navMenu = [];
+    },
     setAuthUserMenu(state) {
       state.userMenu = [{ id: 1, label: 'Выйти', path: '/' }];
     },
@@ -57,6 +60,7 @@ export const {
   setNotAuthNavMenu,
   setAuthNavMenu,
   setNavValue,
+  setSignNavMenu,
 } = navFieldsSlice.actions;
 
 export default navFieldsSlice.reducer;
