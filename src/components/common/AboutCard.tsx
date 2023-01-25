@@ -19,9 +19,10 @@ export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, i
         display: 'flex',
         p: 3,
         gap: 5,
-        flexDirection: { xs: 'column', md: `row${index % 2 ? '' : '-reverse'}` },
+        flexDirection: { xs: 'column', md: `row${index % 2 ? '-reverse' : ''}` },
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 3,
       }}>
       <Avatar alt="user" src={image} sx={{ width: '40%', height: '40%' }} />
       <Box>
@@ -29,8 +30,8 @@ export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, i
         <List>
           {listItems.map((item, i) => (
             <ListItem key={i}>
-              <ListItemIcon>
-                <Brightness1Icon />
+              <ListItemIcon sx={{ minWidth: '2rem' }}>
+                <Brightness1Icon sx={{ fontSize: '0.5rem' }} />
               </ListItemIcon>
               <ListItemText primary={item} />
             </ListItem>
