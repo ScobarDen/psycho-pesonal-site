@@ -11,8 +11,11 @@ import {
   Typography,
 } from '@mui/material';
 import Brightness1Icon from '@mui/icons-material/Brightness1';
+import { useSelector } from 'react-redux';
+import { selectTheme, Theme } from '../../redux/theme';
 
 export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, index }) => {
+  const themeMode = useSelector(selectTheme);
   return (
     <Paper
       sx={{
@@ -23,6 +26,11 @@ export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, i
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 3,
+        backgroundColor: !(index % 2)
+          ? 'inherit'
+          : themeMode === Theme.LIGHT
+          ? '#f9f1f0'
+          : '#2c2222',
       }}>
       <Avatar alt="user" src={image} sx={{ width: '40%', height: '40%' }} />
       <Box>

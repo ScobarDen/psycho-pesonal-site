@@ -8,6 +8,9 @@ export const lightMode = createTheme({
     secondary: {
       main: '#ff5722',
     },
+    background: {
+      paper: '#fafafa',
+    },
     mode: 'light',
   },
   typography: {
