@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
 import Header from '../components/ui/Header';
 import { useAppDispatch } from '../redux/hooks';
-import { setAuthNavMenu, setSignNavMenu } from "../redux/navFields";
+import { setSignNavMenu } from "../redux/navFields";
 
 export const AuthenticationLayout: React.FC = () => {
   const dispatch = useAppDispatch();

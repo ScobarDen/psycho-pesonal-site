@@ -4,12 +4,8 @@ import { Button, Paper, TextField, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import { IFormInput } from "./types";
 
-interface IFormInput {
-  email: string;
-  password: string;
-  fio: string;
-}
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Введите корректный email').required('Это обязательное поле'),
