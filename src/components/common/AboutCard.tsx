@@ -29,8 +29,8 @@ export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, i
         backgroundColor: !(index % 2)
           ? 'inherit'
           : themeMode === Theme.LIGHT
-          ? '#f9f1f0'
-          : '#2c2222',
+          ? 'var(--light-secondary-background-color)'
+          : 'var(--dark-secondary-background-color)',
       }}>
       <Avatar alt="user" src={image} sx={{ width: '40%', height: '40%' }} />
       <Box>
