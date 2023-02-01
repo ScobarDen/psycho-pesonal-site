@@ -9,7 +9,8 @@ export const lightMode = createTheme({
       main: '#ff5722',
     },
     background: {
-      paper: '#fafafa',
+      default: '#fafafa',
+      // paper: '#d26b6b',
     },
     mode: 'light',
   },
