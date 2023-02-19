@@ -1,5 +1,4 @@
 import React from 'react';
-import { IWorkWithField } from '../../pages/types';
 import {
   Avatar,
   Box,
@@ -13,6 +12,7 @@ import {
 import Brightness1Icon from '@mui/icons-material/Brightness1';
 import { useSelector } from 'react-redux';
 import { selectTheme, Theme } from '../../redux/theme';
+import { IWorkWithField } from './types';
 
 export const AboutCard: React.FC<IWorkWithField> = ({ label, image, listItems, index }) => {
   const themeMode = useSelector(selectTheme);

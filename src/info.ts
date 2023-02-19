@@ -1,9 +1,10 @@
-import { IWorkWithField } from './pages/types';
 import aboutCardImage0 from './assets/img/aboutCard/semeynye-trudnosti.jpg';
 import aboutCardImage1 from './assets/img/aboutCard/sloghnosti-v-otnosheniyah.jpg';
 import aboutCardImage2 from './assets/img/aboutCard/razvitie-i-samoocenka.jpg';
 import aboutCardImage3 from './assets/img/aboutCard/emotsionalnye-i-psyhologicheskie-problemy.jpg';
 import aboutCardImage4 from './assets/img/aboutCard/professionalnoe-samoopredelenie.jpg';
+import { WorkWith } from './components/ui/WorkWith';
+import { IScrollContent, IWorkWithField } from './components/common/types';
 
 export const workWithArray: IWorkWithField[] = [
   {
@@ -67,17 +68,20 @@ export const workWithArray: IWorkWithField[] = [
   },
 ];
 
-export const aboutMeContent = [
+export const aboutMeContent: IScrollContent[] = [
   {
     id: 'section1',
     content: 'С чем я работаю',
+    component: WorkWith,
   },
   {
     id: 'section2',
     content: 'Обо мне',
+    component: WorkWith,
   },
   {
     id: 'section3',
     content: 'Образование',
+    component: WorkWith,
   },
 ];
