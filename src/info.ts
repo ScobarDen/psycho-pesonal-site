@@ -66,3 +66,18 @@ export const workWithArray: IWorkWithField[] = [
     ],
   },
 ];
+
+export const aboutMeContent = [
+  {
+    id: 'section1',
+    content: 'С чем я работаю',
+  },
+  {
+    id: 'section2',
+    content: 'Обо мне',
+  },
+  {
+    id: 'section3',
+    content: 'Образование',
+  },
+];
